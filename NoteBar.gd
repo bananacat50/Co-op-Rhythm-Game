@@ -6,6 +6,12 @@ var bpm = 100
 var beat = 1
 var lastBeat = 0
 var line
+
+export var songname : String = "battle"
+
+onready var json_path = "res://songs/" + songname + ".json"
+onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
+
 onready var NB1 = $NoteBar
 onready var NB2 = $NoteBar2
 onready var NB3 = $NoteBar3
@@ -19,7 +25,8 @@ const note = preload("res://Note.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	var json : Dictionary = get_file()
+	fill_beats(json)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -32,20 +39,16 @@ func _process(delta):
 	NB7.position.y = NB7.position.y + delta*100
 	NB8.position.y = NB8.position.y + delta*100
 
-	time += delta*100
-	if (time > bpm*(beat-1)):
-		var notes = Array()
-		for _i in range(1,9):
-			randomize()
-			notes.append(randi()%2)
-		addNotes(notes, beat)
-		beat = beat + 1
+	# time += delta*100
+	# if (time > bpm*(beat-1)):
+	# 	var notes = Array()
+	# 	for _i in range(1,9):
+	# 		randomize()
+	# 		notes.append(randi()%2)
+	# 	addNotes(notes, beat)
+	# 	beat = beat + 1
 		
-func addNotes(lanes, beat):
-	wire4(lanes, beat)
-			
-func wire4(lanes, beat):
-	
+func add_notes(lanes, beat):
 	for i in range(0, lanes.size()):
 		if lanes[i] == 1:
 			var notePosition = Vector2(i*100 + 125 + rand_range(0, 50), -beat*100)
@@ -54,64 +57,82 @@ func wire4(lanes, beat):
 			if i == 0:
 				NB1.add_child(noteCircle)
 				NB1.add_point(notePosition)
-				if lanes[1] == 0:
+				if not lanes[1]:
 					NB2.add_point(notePosition)
-					if lanes[2] == 0 && lanes[3] == 0:
+					if not lanes[2] and not lanes[3]:
 						NB3.add_point(notePosition)
 						NB4.add_point(notePosition)
 			elif i == 1:
 				NB2.add_child(noteCircle)
 				NB2.add_point(notePosition)
-				if lanes[0] == 0:
+				if not lanes[0]:
 					NB1.add_point(notePosition)
-				if lanes[2] == 0 && lanes[3] == 0:
+				if not lanes[2] and not lanes[3]:
 					NB3.add_point(notePosition)
 					NB4.add_point(notePosition)
 			elif i == 2:
 				NB3.add_child(noteCircle)
 				NB3.add_point(notePosition)
-				if lanes[3] == 0:
+				if not lanes[3]:
 					NB4.add_point(notePosition)
-				if lanes[0] == 0 && lanes[1] == 0:
+				if not lanes[0] && not lanes[1]:
 					NB1.add_point(notePosition)
 					NB2.add_point(notePosition)
 			elif i == 3:
 				NB4.add_child(noteCircle)
 				NB4.add_point(notePosition)
-				if lanes[2] == 0:
+				if not lanes[2]:
 					NB3.add_point(notePosition)
-					if lanes[0] == 0 && lanes[1] == 0:
+					if not lanes[0] and not lanes[1]:
 						NB1.add_point(notePosition)
 						NB2.add_point(notePosition)
 			elif i == 4:
 				NB5.add_child(noteCircle)
 				NB5.add_point(notePosition)
-				if lanes[5] == 0:
+				if not lanes[5]:
 					NB6.add_point(notePosition)
-					if lanes[6] == 0 && lanes[7] == 0:
+					if not lanes[6] and not lanes[7]:
 						NB7.add_point(notePosition)
 						NB8.add_point(notePosition)
 			elif i == 5:
 				NB6.add_child(noteCircle)
 				NB6.add_point(notePosition)
-				if lanes[4] == 0:
+				if not lanes[4]:
 					NB5.add_point(notePosition)
-				if lanes[6] == 0 && lanes[7] == 0:
+				if not lanes[6] and not lanes[7]:
 					NB7.add_point(notePosition)
 					NB8.add_point(notePosition)
 			elif i == 6:
 				NB7.add_child(noteCircle)
 				NB7.add_point(notePosition)
-				if lanes[7] == 0:
+				if not lanes[7]:
 					NB8.add_point(notePosition)
-				if lanes[4] == 0 && lanes[5] == 0:
+				if not lanes[4] and not lanes[5]:
 					NB5.add_point(notePosition)
 					NB6.add_point(notePosition)
 			elif i == 7:
 				NB8.add_child(noteCircle)
 				NB8.add_point(notePosition)
-				if lanes[6] == 0:
+				if not lanes[6]:
 					NB7.add_point(notePosition)
-					if lanes[4] == 0 && lanes[5] == 0:
+					if not lanes[4] and not lanes[5]:
 						NB5.add_point(notePosition)
 						NB6.add_point(notePosition)
+			
+func get_file():
+	var f = File.new()
+	assert(f.file_exists(json_path), "File path does not exist")
+	f.open(json_path, File.READ)
+	return parse_json(f.get_as_text())
+
+
+func fill_beats(json : Dictionary):
+	var result = []
+	for beat in json["notes"][0].length():
+		result.append([0, 0, 0, 0, 0, 0, 0, 0])
+		for i in json["notes"].size():
+			var index = str2var(json["notes"][i][beat])
+			if index != 0:
+				result[beat][index - 1] = 1
+		add_notes(result[beat], beat/5.0)
+	return result

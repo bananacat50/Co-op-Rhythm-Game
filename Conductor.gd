@@ -40,6 +40,9 @@ func _ready():
 	bpm *= division/4
 	sec_per_beat = 60.0 / bpm
 	cursor = 0
+
+
+
 	stream = load(audio_path)
 	play()
 	
