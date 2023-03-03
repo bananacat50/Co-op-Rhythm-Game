@@ -30,28 +30,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	NB1.position.y = NB1.position.y + delta*100
-	NB2.position.y = NB2.position.y + delta*100
-	NB3.position.y = NB3.position.y + delta*100
-	NB4.position.y = NB4.position.y + delta*100
-	NB5.position.y = NB5.position.y + delta*100
-	NB6.position.y = NB6.position.y + delta*100
-	NB7.position.y = NB7.position.y + delta*100
-	NB8.position.y = NB8.position.y + delta*100
+	NB1.position.y = NB1.position.y + delta*600
+	NB2.position.y = NB2.position.y + delta*600
+	NB3.position.y = NB3.position.y + delta*600
+	NB4.position.y = NB4.position.y + delta*600
+	NB5.position.y = NB5.position.y + delta*600
+	NB6.position.y = NB6.position.y + delta*600
+	NB7.position.y = NB7.position.y + delta*600
+	NB8.position.y = NB8.position.y + delta*600
 
-	# time += delta*100
-	# if (time > bpm*(beat-1)):
-	# 	var notes = Array()
-	# 	for _i in range(1,9):
-	# 		randomize()
-	# 		notes.append(randi()%2)
-	# 	addNotes(notes, beat)
-	# 	beat = beat + 1
+	process_input()
+	
 		
 func add_notes(lanes, beat):
 	for i in range(0, lanes.size()):
 		if lanes[i] == 1:
-			var notePosition = Vector2(i*100 + 125 + rand_range(0, 50), -beat*100)
+			var notePosition = Vector2(i*100 + 125, -beat*100)
 			var noteCircle = note.instance()
 			noteCircle.position = notePosition
 			if i == 0:
@@ -134,5 +128,11 @@ func fill_beats(json : Dictionary):
 			var index = str2var(json["notes"][i][beat])
 			if index != 0:
 				result[beat][index - 1] = 1
-		add_notes(result[beat], beat/5.0)
+		add_notes(result[beat], beat)
 	return result
+
+
+func process_input():
+	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+		if Input.is_action_just_pressed(i):
+			print(get_node("Sensor" + i).current_state)
