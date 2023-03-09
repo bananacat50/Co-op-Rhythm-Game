@@ -6,6 +6,8 @@ var bpm = 100
 var beat = 1
 var lastBeat = 0
 var line
+var approachRate = 100
+var spacing = 50
 
 export var songname : String = "battle"
 
@@ -23,15 +25,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	NBs.position.y = NBs.position.y + delta*100
+	NBs.position.y = NBs.position.y + delta*approachRate/spacing*bpm
 	
 	process_input()
 		
 func add_notes(lanes, beat):
 	for i in range(0.0, lanes.size()):
 		if lanes[i] == 1:
-#			print(i)
-			var notePosition = Vector2(i*100 + 125, -beat*100)
+			var notePosition = Vector2(i*100 + 125, -beat*spacing)
 			var noteCircle = note.instance()
 			noteCircle.position = notePosition
 			NBs.get_child(i).add_child(noteCircle)
