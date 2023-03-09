@@ -1,5 +1,9 @@
 extends Node2D
 
+const POSITION_SPACING = 54
+const LEFT_POSITION = 97
+const POSITION_GAP_WIDTH = 64
+
 # Declare member variables here. Examples:
 var time = 0
 var bpm = 100
@@ -32,7 +36,9 @@ func _process(delta):
 func add_notes(lanes, beat):
 	for i in range(0.0, lanes.size()):
 		if lanes[i] == 1:
-			var notePosition = Vector2(i*100 + 125, -beat*spacing)
+			var notePosition = Vector2(i*POSITION_SPACING + LEFT_POSITION, -beat*spacing)
+			if i > 3:
+				notePosition.x += POSITION_GAP_WIDTH
 			var noteCircle = note.instance()
 			noteCircle.position = notePosition
 			NBs.get_child(i).add_child(noteCircle)
