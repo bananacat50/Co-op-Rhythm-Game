@@ -1,16 +1,16 @@
 extends Node2D
 
 const POSITION_SPACING = 54
-const LEFT_POSITION = 97
+const LEFT_POSITION = 96
 const POSITION_GAP_WIDTH = 64
 
 # Declare member variables here. Examples:
 var time = 0
-var bpm = 100
+var bpm = 50
 var beat = 1
 var lastBeat = 0
 var line
-var approachRate = 100
+var approachRate = 300
 var spacing = 50
 
 export var songname : String = "battle"
@@ -29,7 +29,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	NBs.position.y = NBs.position.y + delta*approachRate/spacing*bpm
+	NBs.move_and_slide(Vector2(0, approachRate/spacing*bpm))#.position.y = NBs.position.y + delta*approachRate/spacing*bpm
 	
 	process_input()
 		
@@ -71,4 +71,4 @@ func fill_beats(json : Dictionary):
 func process_input():
 	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
 		if Input.is_action_just_pressed(i):
-			print(get_node("Sensor" + i).current_state)
+			print(get_node("Sensors/Sensor" + i).current_state)
