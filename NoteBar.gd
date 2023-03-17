@@ -28,7 +28,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	NBs.move_and_slide(Vector2(0, spacing*30))#approachRate/spacing*bpm))#.position.y = NBs.position.y + delta*approachRate/spacing*bpm
+	NBs.move_and_slide(Vector2(0, spacing*bpm/60))#approachRate/spacing*bpm))#.position.y = NBs.position.y + delta*approachRate/spacing*bpm
 	
 	process_input()
 		
