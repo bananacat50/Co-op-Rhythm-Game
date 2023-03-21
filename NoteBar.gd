@@ -6,11 +6,11 @@ const POSITION_GAP_WIDTH = 64
 
 # Declare member variables here. Examples:
 var time = 0
-var bpm = 185
+var bpm = 185*2
 var beat = 1
 var lastBeat = 0
 var line
-var spacing = 50
+var spacing = 30
 
 export var songname : String = "battle"
 
@@ -25,11 +25,13 @@ const note = preload("res://Note.tscn")
 func _ready():
 	var json : Dictionary = get_file()
 	fill_beats(json)
+	NBs.position.y += 400
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	NBs.move_and_slide(Vector2(0, spacing*bpm/60))#approachRate/spacing*bpm))#.position.y = NBs.position.y + delta*approachRate/spacing*bpm
-	
+	#NBs.move_and_slide(Vector2(0, spacing*bpm/60))#approachRate/spacing*bpm))#.position.y = NBs.position.y + delta*approachRate/spacing*bpm
+	NBs.position.y = NBs.position.y + delta*spacing*bpm/60
+
 	process_input()
 		
 func add_notes(lanes, beat):
