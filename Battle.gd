@@ -18,6 +18,8 @@ onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 
 onready var NBs = $NoteBars
 onready var audio_player = $AudioStreamPlayer
+onready var scoreDisplay = $Score
+onready var comboDisplay = $Combo
 const note = preload("res://Note.tscn")
 
 
@@ -85,4 +87,6 @@ func process_input():
 				combo = 0
 			else:
 				combo += 1
+			scoreDisplay.text = "score: " + str(round(score))
+			comboDisplay.text = "combo: " + str(combo)
 			print(str(round(score)) + " " + str(combo))

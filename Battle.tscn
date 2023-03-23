@@ -1,10 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/audio/battle.ogg" type="AudioStream" id=2]
 [ext_resource path="res://JudgementBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ASSETS/fonts/HopeGold.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -60,3 +67,21 @@ disabled = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
+
+[node name="Score" type="Label" parent="."]
+margin_left = 268.0
+margin_top = 9.0
+margin_right = 367.0
+margin_bottom = 22.0
+theme = SubResource( 3 )
+text = "score: 0"
+align = 1
+
+[node name="Combo" type="Label" parent="."]
+margin_left = 268.0
+margin_top = 22.0
+margin_right = 367.0
+margin_bottom = 35.0
+theme = SubResource( 3 )
+text = "combo: 0"
+align = 1
