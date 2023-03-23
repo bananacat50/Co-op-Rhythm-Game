@@ -12,27 +12,34 @@ var lastBeat = 0
 var line
 var spacing = 30
 
+var song_position : float
+var last_frame_latency : float
+
 export var songname : String = "battle"
 
 onready var json_path = "res://songs/" + songname + ".json"
 onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 
 onready var NBs = $NoteBars
+onready var audio_player = $AudioStreamPlayer
 const note = preload("res://Note.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	last_frame_latency = AudioServer.get_output_latency()
 	var json : Dictionary = get_file()
 	fill_beats(json)
 	NBs.position.y += 400
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#NBs.move_and_slide(Vector2(0, spacing*bpm/60))#approachRate/spacing*bpm))#.position.y = NBs.position.y + delta*approachRate/spacing*bpm
-	NBs.position.y = NBs.position.y + delta*spacing*bpm/60
+	var latency_delta = 0
+	NBs.position.y += delta * spacing * bpm/60 + latency_delta
 
 	process_input()
+
+	last_frame_latency = AudioServer.get_output_latency()
 		
 func add_notes(lanes, beat):
 	for i in range(0.0, lanes.size()):
