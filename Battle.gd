@@ -5,16 +5,10 @@ const LEFT_POSITION = 96
 const POSITION_GAP_WIDTH = 64
 
 # Declare member variables here. Examples:
-var time = 0
-var bpm = 185*2
-var beat = 1
-var lastBeat = 0
-var line
-var spacing = 20
+var bpm : int # comes from json
+var spacing : int # comes from json
 var score = 0
 var combo = 0
-
-var song_position : float
 var last_frame_latency : float
 
 export var songname : String = "battle"
@@ -31,6 +25,9 @@ const note = preload("res://Note.tscn")
 func _ready():
 	last_frame_latency = AudioServer.get_output_latency()
 	var json : Dictionary = get_file()
+	bpm = json["config"]["bpm"]
+	bpm *= json["config"]["division"] / 4
+	spacing = json["config"]["spacing"]
 	fill_beats(json)
 	NBs.position.y += 400
 
