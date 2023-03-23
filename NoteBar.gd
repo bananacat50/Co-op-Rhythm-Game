@@ -10,7 +10,9 @@ var bpm = 185*2
 var beat = 1
 var lastBeat = 0
 var line
-var spacing = 30
+var spacing = 20
+var score = 0
+var combo = 0
 
 var song_position : float
 var last_frame_latency : float
@@ -38,7 +40,7 @@ func _process(delta):
 	NBs.position.y += delta * spacing * bpm/60 + latency_delta
 
 	process_input()
-
+		
 	last_frame_latency = AudioServer.get_output_latency()
 		
 func add_notes(lanes, beat):
@@ -79,4 +81,11 @@ func fill_beats(json : Dictionary):
 func process_input():
 	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
 		if Input.is_action_just_pressed(i):
-			print(get_node("JudgementBar/Sensor" + i).current_state)
+			var result = get_node("JudgementBar/Sensor" + i).current_state
+			print(result)
+			score += result*log(combo+1)
+			if result == 0:
+				combo = 0
+			else:
+				combo += 1
+			print(str(round(score)) + " " + str(combo))
