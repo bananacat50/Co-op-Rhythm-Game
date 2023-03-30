@@ -1,8 +1,8 @@
 extends Node2D
 
 const POSITION_SPACING = 54
-const LEFT_POSITION = 96
-const POSITION_GAP_WIDTH = 64
+const LEFT_POSITION = 50
+const POSITION_GAP_WIDTH = 168
 
 # Declare member variables here. Examples:
 var bpm : int # comes from json

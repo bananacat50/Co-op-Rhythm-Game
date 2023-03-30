@@ -21,76 +21,76 @@ texture = ExtResource( 1 )
 script = ExtResource( 6 )
 
 [node name="1" type="Sprite" parent="JudgementBar"]
-position = Vector2( -237, -14 )
+position = Vector2( -284, -14 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="2" type="Sprite" parent="JudgementBar"]
-position = Vector2( -183, -14 )
+position = Vector2( -230, -14 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="3" type="Sprite" parent="JudgementBar"]
-position = Vector2( -129, -14 )
+position = Vector2( -176, -14 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="4" type="Sprite" parent="JudgementBar"]
-position = Vector2( -75, -14 )
+position = Vector2( -122, -14 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="5" type="Sprite" parent="JudgementBar"]
-position = Vector2( 42, -14 )
+position = Vector2( 99, -14 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="6" type="Sprite" parent="JudgementBar"]
-position = Vector2( 96, -14 )
+position = Vector2( 153, -14 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="7" type="Sprite" parent="JudgementBar"]
-position = Vector2( 150, -14 )
+position = Vector2( 207, -14 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="8" type="Sprite" parent="JudgementBar"]
-position = Vector2( 204, -14 )
+position = Vector2( 261, -14 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="A" type="Label" parent="JudgementBar"]
-margin_left = -229.0
+margin_left = -276.0
 margin_top = -11.0
-margin_right = -189.0
+margin_right = -236.0
 margin_bottom = 3.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "A"
 
 [node name="S" type="Label" parent="JudgementBar"]
-margin_left = -174.0
+margin_left = -221.0
 margin_top = -11.0
-margin_right = -134.0
+margin_right = -181.0
 margin_bottom = 3.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "S"
 
 [node name="D" type="Label" parent="JudgementBar"]
-margin_left = -120.0
+margin_left = -167.0
 margin_top = -11.0
-margin_right = -80.0
+margin_right = -127.0
 margin_bottom = 3.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "D"
 
 [node name="F" type="Label" parent="JudgementBar"]
-margin_left = -66.0
+margin_left = -113.0
 margin_top = -11.0
-margin_right = -26.0
+margin_right = -73.0
 margin_bottom = 18.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -98,61 +98,61 @@ text = "F
 "
 
 [node name="J" type="Label" parent="JudgementBar"]
-margin_left = 51.0
+margin_left = 108.0
 margin_top = -11.0
-margin_right = 91.0
+margin_right = 148.0
 margin_bottom = 3.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "J"
 
 [node name="K" type="Label" parent="JudgementBar"]
-margin_left = 104.0
+margin_left = 161.0
 margin_top = -11.0
-margin_right = 144.0
+margin_right = 201.0
 margin_bottom = 3.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "K"
 
 [node name="L" type="Label" parent="JudgementBar"]
-margin_left = 159.0
+margin_left = 216.0
 margin_top = -11.0
-margin_right = 199.0
+margin_right = 256.0
 margin_bottom = 3.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "L"
 
 [node name=";" type="Label" parent="JudgementBar"]
-margin_left = 214.0
+margin_left = 271.0
 margin_top = -12.0
-margin_right = 254.0
+margin_right = 311.0
 margin_bottom = 2.0
 theme = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = ";"
 
 [node name="Sensor1" parent="." instance=ExtResource( 3 )]
-position = Vector2( 97, 322 )
+position = Vector2( 50, 322 )
 
 [node name="Sensor2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 150, 322 )
+position = Vector2( 103, 322 )
 
 [node name="Sensor3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 204, 322 )
+position = Vector2( 157, 322 )
 
 [node name="Sensor4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 258, 322 )
+position = Vector2( 211, 322 )
 
 [node name="Sensor5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 376, 322 )
+position = Vector2( 433, 322 )
 
 [node name="Sensor6" parent="." instance=ExtResource( 3 )]
-position = Vector2( 429, 322 )
+position = Vector2( 486, 322 )
 
 [node name="Sensor7" parent="." instance=ExtResource( 3 )]
-position = Vector2( 484, 322 )
+position = Vector2( 541, 322 )
 
 [node name="Sensor8" parent="." instance=ExtResource( 3 )]
-position = Vector2( 538, 322 )
+position = Vector2( 595, 322 )

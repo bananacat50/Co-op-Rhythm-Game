@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/audio/battle.ogg" type="AudioStream" id=2]
 [ext_resource path="res://JudgementBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ASSETS/fonts/HopeGold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Rating.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ASSETS/sprites/CircleButtonRed.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -16,6 +17,12 @@ default_font = SubResource( 2 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="CircleButtonRed" type="Sprite" parent="."]
+position = Vector2( 340.5, 177 )
+scale = Vector2( 56.6522, 50.7826 )
+z_index = -200
+texture = ExtResource( 6 )
 
 [node name="NoteBars" type="KinematicBody2D" parent="."]
 
