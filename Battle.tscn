@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/audio/battle.ogg" type="AudioStream" id=2]
 [ext_resource path="res://JudgementBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ASSETS/fonts/HopeGold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Rating.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -85,3 +86,5 @@ margin_bottom = 35.0
 theme = SubResource( 3 )
 text = "combo: 0"
 align = 1
+
+[node name="Rating" parent="." instance=ExtResource( 5 )]

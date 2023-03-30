@@ -9,6 +9,7 @@ var bpm : int # comes from json
 var spacing : int # comes from json
 var score = 0
 var combo = 0
+var ratings = ["MISS", "BAD", "GOOD", "GREAT", "PERFECT"]
 var last_frame_latency : float
 
 export var songname : String = "battle"
@@ -81,7 +82,21 @@ func process_input():
 	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
 		if Input.is_action_just_pressed(i):
 			var result = get_node("JudgementBar/Sensor" + i).current_state
-			print(result)
+			var rating = preload("res://Rating.tscn").instance()
+			rating.text = ratings[result]
+			if result == 0:
+				rating.set("custom_colors/font_color",Color.red)
+			elif result == 1:
+				rating.set("custom_colors/font_color",Color.orange)
+			elif result == 2:
+				rating.set("custom_colors/font_color",Color.yellow)
+			elif result == 3:
+				rating.set("custom_colors/font_color",Color.green)
+			else:
+				rating.set("custom_colors/font_color",Color.blue)
+			add_child(rating)
+			rating.get_child(0).play("New Anim")
+			print(ratings[result])
 			score += result*log(combo+1)
 			if result == 0:
 				combo = 0
