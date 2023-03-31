@@ -85,6 +85,7 @@ func process_input():
 			var rating = preload("res://Rating.tscn").instance()
 			rating.text = ratings[result]
 			if result == 0:
+				score -= 5
 				rating.set("custom_colors/font_color",Color.red)
 			elif result == 1:
 				rating.set("custom_colors/font_color",Color.orange)
