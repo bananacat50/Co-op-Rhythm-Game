@@ -17,10 +17,11 @@ export var songname : String = "battle"
 onready var json_path = "res://songs/" + songname + ".json"
 onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 
-onready var NBs = $NoteBars
-onready var audio_player = $AudioStreamPlayer
-onready var scoreDisplay = $Score
-onready var comboDisplay = $Combo
+onready var NBs = $CanvasLayer/NoteBars
+onready var audio_player = $CanvasLayer/AudioStreamPlayer
+onready var scoreDisplay = $CanvasLayer/Score
+onready var comboDisplay = $CanvasLayer/Combo
+onready var canvasLayer = $CanvasLayer
 const note = preload("res://Note.tscn")
 
 
@@ -34,14 +35,16 @@ func _ready():
 	fill_beats(json)
 	NBs.position.y += 400
 
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var latency_delta = 0
 	NBs.position.y += delta * spacing * bpm/60 + latency_delta
-
+	
 	process_input()
-		
+	
 	last_frame_latency = AudioServer.get_output_latency()
+	$Road/Camera2D/AnimationPlayer.playback_speed = (delta * spacing * bpm + latency_delta) / 392.0
 		
 func add_notes(lanes, beat):
 	for i in range(0.0, lanes.size()):
@@ -81,10 +84,11 @@ func fill_beats(json : Dictionary):
 func process_input():
 	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
 		if Input.is_action_just_pressed(i):
-			var result = get_node("JudgementBar/Sensor" + i).current_state
+			var result = get_node("CanvasLayer/JudgementBar/Sensor" + i).current_state
 			var rating = preload("res://Rating.tscn").instance()
 			rating.text = ratings[result]
 			if result == 0:
+				score -= 5
 				rating.set("custom_colors/font_color",Color.red)
 			elif result == 1:
 				rating.set("custom_colors/font_color",Color.orange)
@@ -94,7 +98,7 @@ func process_input():
 				rating.set("custom_colors/font_color",Color.green)
 			else:
 				rating.set("custom_colors/font_color",Color.blue)
-			add_child(rating)
+			canvasLayer.add_child(rating)
 			rating.get_child(0).play("New Anim")
 			print(ratings[result])
 			score += result*log(combo+1)
