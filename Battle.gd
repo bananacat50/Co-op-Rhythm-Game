@@ -12,9 +12,10 @@ var combo = 0
 var ratings = ["MISS", "BAD", "GOOD", "GREAT", "PERFECT"]
 var last_frame_latency : float
 
-export var songname : String = "battle"
+export var songname : String = "ArtificialChariot"
 
 onready var json_path = "res://songs/" + songname + ".json"
+#onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 
 onready var NBs = $CanvasLayer/NoteBars

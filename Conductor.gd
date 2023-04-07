@@ -12,7 +12,7 @@ extends AudioStreamPlayer
 
 signal spawn_beat
 
-export var songname : String = "battle"
+export var songname : String = "ArtificialChariot"
 
 onready var json_path = "res://songs/" + songname + ".json"
 onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
