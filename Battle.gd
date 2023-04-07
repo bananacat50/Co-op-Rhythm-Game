@@ -74,6 +74,9 @@ func fill_beats(json : Dictionary):
 	var result = []
 	for beat in json["notes"][0].length():
 		result.append([0, 0, 0, 0, 0, 0, 0, 0])
+	for beat in range(json["notes"][0].length()-1, 0.0, -1):
+#	for beat in json["notes"][0].length():
+#		result.append([0, 0, 0, 0, 0, 0, 0, 0])
 		for i in json["notes"].size():
 			var index = str2var(json["notes"][i][beat])
 			if index != 0:
