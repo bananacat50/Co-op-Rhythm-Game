@@ -48,7 +48,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 264, 118 ) ]
+"values": [ Vector2( 649, 310 ) ]
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:rect_position:x")
@@ -57,7 +57,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 551, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 649, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
@@ -67,7 +67,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 312, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 310, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/3/type = "value"
@@ -84,10 +84,10 @@ tracks/3/keys = {
 }
 
 [node name="Rating" type="Label"]
-margin_left = 551.0
-margin_top = 312.0
-margin_right = 576.0
-margin_bottom = 328.0
+margin_left = 649.0
+margin_top = 310.0
+margin_right = 674.0
+margin_bottom = 326.0
 theme = SubResource( 3 )
 text = "MISS"
 align = 1
