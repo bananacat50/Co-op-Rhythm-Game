@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ASSETS/sprites/Road.png" type="Texture" id=1]
+[ext_resource path="res://ASSETS/sprites/Background.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -40,8 +41,12 @@ tracks/0/keys = {
 [node name="RoadLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 0, 392 )
 
+[node name="Background" type="Sprite" parent="ParallaxBackground/RoadLayer"]
+texture = ExtResource( 2 )
+centered = false
+
 [node name="Road" type="Sprite" parent="ParallaxBackground/RoadLayer"]
-position = Vector2( 236, 0 )
+position = Vector2( 233, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_rect = Rect2( 0, 0, 178, 392 )
