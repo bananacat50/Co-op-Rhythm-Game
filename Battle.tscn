@@ -1,20 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/audio/ArtificialChariot.ogg" type="AudioStream" id=2]
 [ext_resource path="res://JudgementBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ASSETS/fonts/HopeGold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://DefaultText.theme" type="Theme" id=4]
 [ext_resource path="res://Rating.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ASSETS/sprites/CircleButtonRed.png" type="Texture" id=6]
 [ext_resource path="res://Road.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 4 )
-
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -89,7 +83,7 @@ margin_left = 268.0
 margin_top = 9.0
 margin_right = 367.0
 margin_bottom = 22.0
-theme = SubResource( 3 )
+theme = ExtResource( 4 )
 text = "score: 0"
 align = 1
 
@@ -98,7 +92,7 @@ margin_left = 268.0
 margin_top = 22.0
 margin_right = 367.0
 margin_bottom = 35.0
-theme = SubResource( 3 )
+theme = ExtResource( 4 )
 text = "combo: 0"
 align = 1
 
@@ -107,7 +101,7 @@ margin_left = 70.0
 margin_top = 9.0
 margin_right = 169.0
 margin_bottom = 22.0
-theme = SubResource( 3 )
+theme = ExtResource( 4 )
 text = "score: 0"
 align = 1
 
@@ -116,7 +110,7 @@ margin_left = 70.0
 margin_top = 20.0
 margin_right = 169.0
 margin_bottom = 33.0
-theme = SubResource( 3 )
+theme = ExtResource( 4 )
 text = "combo: 0"
 align = 1
 
@@ -125,7 +119,7 @@ margin_left = 461.0
 margin_top = 9.0
 margin_right = 560.0
 margin_bottom = 22.0
-theme = SubResource( 3 )
+theme = ExtResource( 4 )
 text = "score: 0"
 align = 1
 
@@ -134,7 +128,7 @@ margin_left = 461.0
 margin_top = 20.0
 margin_right = 560.0
 margin_bottom = 33.0
-theme = SubResource( 3 )
+theme = ExtResource( 4 )
 text = "combo: 0"
 align = 1
 
