@@ -4,15 +4,21 @@ const POSITION_SPACING = 54
 const LEFT_POSITION = 50
 const POSITION_GAP_WIDTH = 168
 
+export var songname : String = "ArtificialChariot"
+export var seperate_score : bool = false
+export var seperate_combo : bool = false
+
 # Declare member variables here. Examples:
 var bpm : int # comes from json
 var spacing : int # comes from json
 var score = 0
+var scoreP1 = 0
+var scoreP2 = 0
 var combo = 0
+var comboP1 = 0
+var comboP2 = 0
 var ratings = ["MISS", "BAD", "GOOD", "GREAT", "PERFECT"]
 var last_frame_latency : float
-
-export var songname : String = "ArtificialChariot"
 
 onready var json_path = "res://songs/" + songname + ".json"
 #onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
@@ -20,8 +26,15 @@ onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 
 onready var NBs = $CanvasLayer/NoteBars
 onready var audio_player = $CanvasLayer/AudioStreamPlayer
-onready var scoreDisplay = $CanvasLayer/Score
-onready var comboDisplay = $CanvasLayer/Combo
+
+onready var scoreDisplay = $CanvasLayer/ScoreCenter
+onready var scoreP1Display = $CanvasLayer/ScoreP1
+onready var scoreP2Display = $CanvasLayer/ScoreP2
+
+onready var comboDisplay = $CanvasLayer/ComboCenter
+onready var comboP1Display = $CanvasLayer/ComboP1
+onready var comboP2Display = $CanvasLayer/ComboP2
+
 onready var canvasLayer = $CanvasLayer
 const note = preload("res://Note.tscn")
 
@@ -35,6 +48,7 @@ func _ready():
 	spacing = json["config"]["spacing"]
 	fill_beats(json)
 	NBs.position.y += 400
+	set_label_visibilities()
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -92,7 +106,7 @@ func process_input():
 			var rating = preload("res://Rating.tscn").instance()
 			rating.text = ratings[result]
 			if result == 0:
-				score -= 5
+				change_score(i, -5)
 				rating.set("custom_colors/font_color",Color.red)
 			elif result == 1:
 				rating.set("custom_colors/font_color",Color.orange)
@@ -105,11 +119,54 @@ func process_input():
 			canvasLayer.add_child(rating)
 			rating.get_child(0).play("New Anim")
 			print(ratings[result])
-			score += result*log(combo+1)
+			change_score(i, result*log(get_combo(i) + 1) + 1)
 			if result == 0:
-				combo = 0
+				set_combo(i, 0)
 			else:
-				combo += 1
+				set_combo(i, get_combo(i) + 1)
+
 			scoreDisplay.text = "score: " + str(round(score))
+			scoreP1Display.text = "score: " + str(round(scoreP1))
+			scoreP2Display.text = "score: " + str(round(scoreP2))
+
 			comboDisplay.text = "combo: " + str(combo)
+			comboP1Display.text = "combo: " + str(round(comboP1))
+			comboP2Display.text = "combo: " + str(round(comboP2))
+
 			print(str(round(score)) + " " + str(combo))
+
+func set_label_visibilities():
+	scoreDisplay.visible = not seperate_score
+	scoreP1Display.visible = seperate_score
+	scoreP2Display.visible = seperate_score
+
+	comboDisplay.visible = not seperate_combo
+	comboP1Display.visible = seperate_combo
+	comboP2Display.visible = seperate_combo
+
+func change_score(input_string : String, change : int):
+	if seperate_score:
+		if str2var(input_string) < 5:
+			scoreP1 += change
+		else:
+			scoreP2 += change
+	else:
+		score += change
+
+func get_combo(input_string : String):
+	if seperate_combo:
+		if str2var(input_string) < 5:
+			return comboP1
+		else:
+			return comboP2
+	else:
+		return combo
+
+func set_combo(input_string : String, value : int):
+	if seperate_combo:
+		if str2var(input_string) < 5:
+			comboP1 = value
+		else:
+			comboP2 = value
+	else:
+		combo = value

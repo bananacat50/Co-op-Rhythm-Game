@@ -18,6 +18,8 @@ default_font = SubResource( 2 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
+seperate_score = true
+seperate_combo = true
 
 [node name="Road" parent="." instance=ExtResource( 7 )]
 
@@ -82,7 +84,7 @@ disabled = true
 stream = ExtResource( 2 )
 autoplay = true
 
-[node name="Score" type="Label" parent="CanvasLayer"]
+[node name="ScoreCenter" type="Label" parent="CanvasLayer"]
 margin_left = 268.0
 margin_top = 9.0
 margin_right = 367.0
@@ -91,11 +93,47 @@ theme = SubResource( 3 )
 text = "score: 0"
 align = 1
 
-[node name="Combo" type="Label" parent="CanvasLayer"]
+[node name="ComboCenter" type="Label" parent="CanvasLayer"]
 margin_left = 268.0
 margin_top = 22.0
 margin_right = 367.0
 margin_bottom = 35.0
+theme = SubResource( 3 )
+text = "combo: 0"
+align = 1
+
+[node name="ScoreP1" type="Label" parent="CanvasLayer"]
+margin_left = 70.0
+margin_top = 9.0
+margin_right = 169.0
+margin_bottom = 22.0
+theme = SubResource( 3 )
+text = "score: 0"
+align = 1
+
+[node name="ComboP1" type="Label" parent="CanvasLayer"]
+margin_left = 70.0
+margin_top = 20.0
+margin_right = 169.0
+margin_bottom = 33.0
+theme = SubResource( 3 )
+text = "combo: 0"
+align = 1
+
+[node name="ScoreP2" type="Label" parent="CanvasLayer"]
+margin_left = 461.0
+margin_top = 9.0
+margin_right = 560.0
+margin_bottom = 22.0
+theme = SubResource( 3 )
+text = "score: 0"
+align = 1
+
+[node name="ComboP2" type="Label" parent="CanvasLayer"]
+margin_left = 461.0
+margin_top = 20.0
+margin_right = 560.0
+margin_bottom = 33.0
 theme = SubResource( 3 )
 text = "combo: 0"
 align = 1
