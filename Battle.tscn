@@ -12,8 +12,6 @@
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
-seperate_score = true
-seperate_combo = true
 
 [node name="Road" parent="." instance=ExtResource( 7 )]
 

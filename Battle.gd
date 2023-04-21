@@ -5,8 +5,8 @@ const LEFT_POSITION = 50
 const POSITION_GAP_WIDTH = 168
 
 export var songname : String = "ArtificialChariot"
-export var seperate_score : bool = false
-export var seperate_combo : bool = false
+export var seperate_score : bool = true
+export var seperate_combo : bool = true
 
 # Declare member variables here. Examples:
 var bpm : int # comes from json
@@ -117,21 +117,19 @@ func process_input():
 			else:
 				rating.set("custom_colors/font_color",Color.blue)
 			canvasLayer.add_child(rating)
-			rating.get_child(0).play("New Anim")
+			if seperate_combo || seperate_score:
+				if str2var(i) < 5:
+					rating.get_child(0).play("New Anim 2")
+				else:
+					rating.get_child(0).play("New Anim 3")
+			else:
+				rating.get_child(0).play("New Anim")
 			print(ratings[result])
 			change_score(i, result*log(get_combo(i) + 1) + 1)
 			if result == 0:
 				set_combo(i, 0)
 			else:
 				set_combo(i, get_combo(i) + 1)
-
-			scoreDisplay.text = "score: " + str(round(score))
-			scoreP1Display.text = "score: " + str(round(scoreP1))
-			scoreP2Display.text = "score: " + str(round(scoreP2))
-
-			comboDisplay.text = "combo: " + str(combo)
-			comboP1Display.text = "combo: " + str(round(comboP1))
-			comboP2Display.text = "combo: " + str(round(comboP2))
 
 			print(str(round(score)) + " " + str(combo))
 
@@ -148,10 +146,13 @@ func change_score(input_string : String, change : int):
 	if seperate_score:
 		if str2var(input_string) < 5:
 			scoreP1 += change
+			scoreP1Display.text = "score: " + str(round(scoreP1))
 		else:
 			scoreP2 += change
+			scoreP2Display.text = "score: " + str(round(scoreP2))
 	else:
 		score += change
+		scoreDisplay.text = "score: " + str(round(score))
 
 func get_combo(input_string : String):
 	if seperate_combo:
@@ -166,7 +167,10 @@ func set_combo(input_string : String, value : int):
 	if seperate_combo:
 		if str2var(input_string) < 5:
 			comboP1 = value
+			comboP1Display.text = "combo: " + str(round(comboP1))
 		else:
 			comboP2 = value
+			comboP2Display.text = "combo: " + str(round(comboP2))
 	else:
 		combo = value
+		comboDisplay.text = "combo: " + str(combo)
