@@ -3,7 +3,7 @@
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/audio/ArtificialChariot.ogg" type="AudioStream" id=2]
 [ext_resource path="res://JudgementBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://DefaultText.theme" type="Theme" id=4]
+[ext_resource path="res://Default.theme" type="Theme" id=4]
 [ext_resource path="res://Rating.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ASSETS/sprites/CircleButtonRed.png" type="Texture" id=6]
 [ext_resource path="res://Road.tscn" type="PackedScene" id=7]
@@ -78,7 +78,7 @@ disabled = true
 [node name="MissBar" type="Area2D" parent="CanvasLayer/JudgementBar"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/JudgementBar/MissBar"]
-position = Vector2( 326, 385 )
+position = Vector2( 328, 367 )
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
