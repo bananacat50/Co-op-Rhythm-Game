@@ -74,7 +74,6 @@ disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
 stream = ExtResource( 2 )
-autoplay = true
 
 [node name="ScoreCenter" type="Label" parent="CanvasLayer"]
 margin_left = 268.0

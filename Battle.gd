@@ -21,7 +21,6 @@ var ratings = ["MISS", "BAD", "GOOD", "GREAT", "PERFECT"]
 var last_frame_latency : float
 
 onready var json_path = "res://songs/" + songname + ".json"
-#onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 onready var audio_path = "res://ASSETS/audio/" + songname + ".ogg"
 
 onready var NBs = $CanvasLayer/NoteBars
@@ -49,6 +48,8 @@ func _ready():
 	fill_beats(json)
 	NBs.position.y += 400
 	set_label_visibilities()
+	audio_player.stream = load(audio_path)
+	audio_player.play()
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -86,11 +87,10 @@ func get_file():
 
 func fill_beats(json : Dictionary):
 	var result = []
+	NBs.position.y -= json["config"]["delay"]
 	for beat in json["notes"][0].length():
 		result.append([0, 0, 0, 0, 0, 0, 0, 0])
 	for beat in range(json["notes"][0].length()-1, 0.0, -1):
-#	for beat in json["notes"][0].length():
-#		result.append([0, 0, 0, 0, 0, 0, 0, 0])
 		for i in json["notes"].size():
 			var index = str2var(json["notes"][i][beat])
 			if index != 0:
