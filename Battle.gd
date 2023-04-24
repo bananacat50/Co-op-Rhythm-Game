@@ -10,7 +10,7 @@ export var seperate_combo : bool = true
 
 # Declare member variables here. Examples:
 var bpm : int # comes from json
-var spacing : int # comes from json
+var spacing : int = 30
 var score = 0
 var scoreP1 = 0
 var scoreP2 = 0
@@ -44,7 +44,7 @@ func _ready():
 	var json : Dictionary = get_file()
 	bpm = json["config"]["bpm"]
 	bpm *= json["config"]["division"] / 4
-	spacing = json["config"]["spacing"]
+	#spacing = json["config"]["spacing"]
 	fill_beats(json)
 	NBs.position.y += 400
 	set_label_visibilities()
@@ -94,7 +94,7 @@ func get_file():
 
 func fill_beats(json : Dictionary):
 	var result = []
-	NBs.position.y -= json["config"]["delay"]
+	NBs.position.y -= json["config"]["delay"] * spacing / json["config"]["spacing"]
 	for beat in json["notes"][0].length():
 		result.append([0, 0, 0, 0, 0, 0, 0, 0])
 	for beat in range(json["notes"][0].length()-1, 0.0, -1):
