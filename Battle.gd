@@ -58,7 +58,11 @@ func _process(delta):
 	
 	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
 		if Input.is_action_just_pressed(i):
-			var result = get_node("CanvasLayer/JudgementBar/Sensor" + i).current_state
+			var sensor = get_node("CanvasLayer/JudgementBar/Sensor" + i)
+			var result = sensor.current_state
+			if sensor.current_note:
+				sensor.current_note.get_node("CollisionShape").disabled = true
+			
 			process_input(result, i)
 	
 	last_frame_latency = AudioServer.get_output_latency()
