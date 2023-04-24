@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://ASSETS/audio/ArtificialChariot.ogg" type="AudioStream" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://Road.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 325, 6.5 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -72,6 +75,12 @@ disabled = true
 
 [node name="JudgementBar" parent="CanvasLayer" instance=ExtResource( 3 )]
 
+[node name="MissBar" type="Area2D" parent="CanvasLayer/JudgementBar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/JudgementBar/MissBar"]
+position = Vector2( 326, 385 )
+shape = SubResource( 2 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
 stream = ExtResource( 2 )
 autoplay = true
@@ -131,3 +140,5 @@ text = "combo: 0"
 align = 1
 
 [node name="Rating" parent="CanvasLayer" instance=ExtResource( 5 )]
+
+[connection signal="body_entered" from="CanvasLayer/JudgementBar/MissBar" to="." method="_on_MissBar_body_entered"]

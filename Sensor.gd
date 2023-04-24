@@ -1,4 +1,5 @@
 extends Node2D
+class_name Sensor
 
 enum STATE {MISS, BAD, GOOD, GREAT, PERFECT}
 

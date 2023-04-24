@@ -56,7 +56,10 @@ func _process(delta):
 	var latency_delta = 0
 	NBs.position.y += delta * spacing * bpm/60 + latency_delta
 	
-	process_input()
+	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+		if Input.is_action_just_pressed(i):
+			var result = get_node("CanvasLayer/JudgementBar/Sensor" + i).current_state
+			process_input(result, i)
 	
 	last_frame_latency = AudioServer.get_output_latency()
 	$Road/Camera2D/AnimationPlayer.playback_speed = (delta * spacing * bpm + latency_delta) / 392.0
@@ -99,39 +102,36 @@ func fill_beats(json : Dictionary):
 	return result
 
 
-func process_input():
-	for i in ["1", "2", "3", "4", "5", "6", "7", "8"]:
-		if Input.is_action_just_pressed(i):
-			var result = get_node("CanvasLayer/JudgementBar/Sensor" + i).current_state
-			var rating = preload("res://Rating.tscn").instance()
-			rating.text = ratings[result]
-			if result == 0:
-				change_score(i, -5)
-				rating.set("custom_colors/font_color",Color.red)
-			elif result == 1:
-				rating.set("custom_colors/font_color",Color.orange)
-			elif result == 2:
-				rating.set("custom_colors/font_color",Color.yellow)
-			elif result == 3:
-				rating.set("custom_colors/font_color",Color.green)
-			else:
-				rating.set("custom_colors/font_color",Color.blue)
-			canvasLayer.add_child(rating)
-			if seperate_combo || seperate_score:
-				if str2var(i) < 5:
-					rating.get_child(0).play("New Anim 2")
-				else:
-					rating.get_child(0).play("New Anim 3")
-			else:
-				rating.get_child(0).play("New Anim")
-			print(ratings[result])
-			change_score(i, result*log(get_combo(i) + 1) + 1)
-			if result == 0:
-				set_combo(i, 0)
-			else:
-				set_combo(i, get_combo(i) + 1)
+func process_input(result, i):
+	var rating = preload("res://Rating.tscn").instance()
+	rating.text = ratings[result]
+	if result == 0:
+		change_score(i, -5)
+		rating.set("custom_colors/font_color",Color.red)
+	elif result == 1:
+		rating.set("custom_colors/font_color",Color.orange)
+	elif result == 2:
+		rating.set("custom_colors/font_color",Color.yellow)
+	elif result == 3:
+		rating.set("custom_colors/font_color",Color.green)
+	else:
+		rating.set("custom_colors/font_color",Color.blue)
+	canvasLayer.add_child(rating)
+	if seperate_combo || seperate_score:
+		if str2var(i) < 5:
+			rating.get_child(0).play("New Anim 2")
+		else:
+			rating.get_child(0).play("New Anim 3")
+	else:
+		rating.get_child(0).play("New Anim")
+	print(ratings[result])
+	change_score(i, result*log(get_combo(i) + 1) + 1)
+	if result == 0:
+		set_combo(i, 0)
+	else:
+		set_combo(i, get_combo(i) + 1)
 
-			print(str(round(score)) + " " + str(combo))
+	print(str(round(score)) + " " + str(combo))
 
 func set_label_visibilities():
 	scoreDisplay.visible = not seperate_score
@@ -174,3 +174,8 @@ func set_combo(input_string : String, value : int):
 	else:
 		combo = value
 		comboDisplay.text = "combo: " + str(combo)
+
+func _on_MissBar_body_entered(body):
+	var i : String = str((body.position.x - LEFT_POSITION) / POSITION_SPACING)
+	process_input(0, i)
+	body.queue_free()
