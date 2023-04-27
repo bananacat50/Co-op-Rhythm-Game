@@ -78,7 +78,7 @@ disabled = true
 [node name="MissBar" type="Area2D" parent="CanvasLayer/JudgementBar"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/JudgementBar/MissBar"]
-position = Vector2( 328, 367 )
+position = Vector2( 325, 387 )
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
@@ -141,3 +141,4 @@ align = 1
 [node name="Rating" parent="CanvasLayer" instance=ExtResource( 5 )]
 
 [connection signal="body_entered" from="CanvasLayer/JudgementBar/MissBar" to="." method="_on_MissBar_body_entered"]
+[connection signal="finished" from="CanvasLayer/AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]

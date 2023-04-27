@@ -53,6 +53,7 @@ margin_right = 417.0
 margin_bottom = 237.0
 min_value = 15.0
 max_value = 23.0
+step = 0.1
 value = 15.0
 
 [node name="Label2" type="Label" parent="Options"]

@@ -128,14 +128,11 @@ func process_input(result, i):
 			rating.get_child(0).play("New Anim 3")
 	else:
 		rating.get_child(0).play("New Anim")
-	print(ratings[result])
 	change_score(i, result*log(get_combo(i) + 1) + 1)
 	if result == 0:
 		set_combo(i, 0)
 	else:
 		set_combo(i, get_combo(i) + 1)
-
-	print(str(round(score)) + " " + str(combo))
 
 func set_label_visibilities():
 	scoreDisplay.visible = not seperate_score
@@ -183,3 +180,6 @@ func _on_MissBar_body_entered(body):
 	var i : String = str((body.position.x - LEFT_POSITION) / POSITION_SPACING)
 	process_input(0, i)
 	body.queue_free()
+
+func _on_AudioStreamPlayer_finished():
+	print("finished signal sent")

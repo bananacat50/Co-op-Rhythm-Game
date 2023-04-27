@@ -11,5 +11,5 @@ dest_files=[ "res://.import/ArtificialChariot.ogg-5f2ddba218a83ce16f03dfc2628215
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

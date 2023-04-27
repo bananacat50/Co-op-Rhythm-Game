@@ -17,3 +17,10 @@ func _process(delta):
 			battle.songname = child.name
 			$SongSelect.hide()
 			add_child(battle)
+			battle.get_node("CanvasLayer/AudioStreamPlayer").connect("finished", self, "_on_AudioStreamPlayer_finished")
+
+func _on_AudioStreamPlayer_finished():
+	battle.queue_free()
+	battle = preload("res://Battle.tscn").instance()
+	$Options.show()
+	$SongSelect.hide()
