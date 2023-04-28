@@ -16,6 +16,7 @@ func _process(delta):
 		if child is Button and child.pressed:
 			battle.songname = child.name
 			$SongSelect.hide()
+			$Background.hide()
 			add_child(battle)
 			battle.get_node("CanvasLayer/AudioStreamPlayer").connect("finished", self, "_on_AudioStreamPlayer_finished")
 
@@ -24,3 +25,4 @@ func _on_AudioStreamPlayer_finished():
 	battle = preload("res://Battle.tscn").instance()
 	$Options.show()
 	$SongSelect.hide()
+	$Background.show()
